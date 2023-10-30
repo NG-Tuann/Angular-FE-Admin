@@ -1,0 +1,67 @@
+<div class="wrapper" *ngIf="product">
+  <!-- The Modal -->
+  <div id="myModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <span style="text-align:right" class="close" (click)="closeModal();">&times;</span>
+      <h1>{{title}}</h1>
+      <p>Fill in  the form to create new product ..</p>
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" [(ngModel)]="product.name" class="form-control" id="name" placeholder="Enter name" >
+      </div>
+      <div class="form-group">
+        <label for="name">Thumbnail:</label>
+        <input type="file" (change)="getFile($event)" class="form-control-lg" id="name" placeholder="Upload img" >
+      </div>
+
+      <div class="form-group">
+        <label for="name">Detail images:</label>
+        <input type="file" multiple class="form-control-lg" (change)="getFiles($event)"  id="name" placeholder="Upload img" >
+      </div>
+
+      <div class="form-group">
+        <label for="geomancy">Geomancy:</label>
+        <select class="form-control" id="geomancy" [(ngModel)]="product.geomancy">
+            <option *ngFor="let geo of geomancies" [value]="geo.id" aria-required="true">{{ geo.name }}</option>
+          </select>
+      </div>
+
+      <div class="form-group">
+        <label for="color">Color:</label>
+        <input type="text" [(ngModel)]="product.color" class="form-control" id="color" placeholder="Enter color" >
+      </div>
+
+      <div class="form-group">
+        <label for="note">Note:</label>
+        <input type="text" [(ngModel)]="product.note" class="form-control" id="note" placeholder="Enter note" >
+      </div>
+
+      <div class="form-group">
+        <label for="category">Category:</label>
+        <select class="form-control" id="category" [(ngModel)]="product.cat">
+            <option *ngFor="let category of categories" [value]="category.id" aria-required="true">{{ category.name }}</option>
+          </select>
+      </div>
+
+      <div class="form-group">
+        <label for="mainstone">Main stone:</label>
+        <select class="form-control" id="mainstone" [(ngModel)]="product.mainStone">
+            <option *ngFor="let stone of stones" [value]="stone.id" aria-required="true">{{ stone.name }}</option>
+          </select>
+      </div>
+
+      <div class="form-group">
+        <label for="substone">Sub stone:</label>
+        <select class="form-control" id="substone" [(ngModel)]="product.subStone">
+            <option *ngFor="let stone of stones" [value]="stone.id">{{ stone.name }}</option>
+          </select>
+      </div>
+
+      <hr>
+      <button class="btn btn-primary" (click)="createNewProduct(product);" *ngIf="!product.id">Create new</button>
+      <button class="btn btn-primary" (click)="updateProduct(product);" *ngIf="product.id">Save</button>
+
+    </div>
+  </div>
+</div>

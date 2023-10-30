@@ -1,0 +1,80 @@
+/* users */
+
+.true-check {
+    background-color: var(--color-success);
+    padding: 2px 6px;
+    color: var(--color-white);
+    font-size: 11px;
+    border-radius: var(--border-radius-1);
+}
+
+.false-check {
+    background-color: var(--color-danger);
+    padding: 2px 6px;
+    color: var(--color-white);
+    font-size: 11px;
+    border-radius: var(--border-radius-1);
+}
+
+.btn-create-new {
+    width: 44px;
+    height: 44px;
+    background-color: #202528;
+    border-radius: 50px;
+    display: flex;
+}
+
+.btn-create-new:hover {
+    opacity: 0.8;
+}
+
+.side-context-option {
+    position: relative;
+}
+
+@keyframes smooth-appear {
+    to{
+      right: 20px;
+      opacity:1;
+    }
+  }
+
+.side-context-option-menu {
+    width: 100px;
+    height: 70px;
+    right: calc(100% + 20px);
+    top: -20px;
+    position: absolute;
+    background-color: #343A40;
+    display: none;
+    opacity:0;
+    transform: translateX(-10%);
+    animation: smooth-appear 1s ease forwards;
+}
+
+.side-context-option-menu ul  {
+    padding: 10px;
+}
+
+.side-context-option-menu ul li {
+    list-style: none;
+    margin-bottom: 10px;
+    margin-left: 0;
+    transition: margin-left 0.1s ease;
+}
+
+.side-context-option-menu ul li:hover {
+    margin-left: 4px; 
+}
+
+.side-context-option-menu ul li:hover:nth-child(1) {
+    color:#FE0161;
+}
+
+.side-context-option-menu ul li:hover:nth-child(2) {
+    color:#FE0161;
+}
+
+.show-context {
+    display: block;
+}

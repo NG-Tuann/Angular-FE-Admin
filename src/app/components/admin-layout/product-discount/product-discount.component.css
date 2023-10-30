@@ -1,0 +1,12 @@
+/* Button create new */
+.btn-create-new {
+    width: 44px;
+    height: 44px;
+    background-color: #202528;
+    border-radius: 50px;
+    display: flex;
+}
+
+.btn-create-new:hover {
+    opacity: 0.8;
+}

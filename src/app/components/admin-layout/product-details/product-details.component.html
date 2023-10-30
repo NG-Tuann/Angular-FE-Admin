@@ -1,0 +1,53 @@
+<div class="row" style="margin-top:30px;">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-11">
+                <h1>Product details</h1>
+            </div>
+        </div>
+
+        <div *ngIf="loaderService.isLoading | async">
+            <app-progress></app-progress>
+        </div>
+
+        <table class="table table-dark table-hover mt-4">
+            <thead>
+                <tr>
+                  <th scope="col">Name</th>
+                  <th scope="col">Image</th>
+                  <th scope="col">Best seller</th>
+                  <th scope="col">Homeflag</th>
+                  <th scope="col">Active</th>
+                  <th scope="col">Category product</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let product of products; let i = index" (click)="onShowProductDetail(product)" >
+                    <td>{{product.name}}</td>
+                    <td style="width: 120px; height: 100px;"><img class="img_product" src="{{product.image}}" alt="{{product.name}}"></td>
+                    <td>
+                        <span *ngIf="product.bestSeller" class="true-check"><i class="fa fa-check"></i></span>
+                        <span *ngIf="!product.bestSeller" class="false-check"><i class="fa fa-close"></i></span>
+                    </td>
+                    <td>
+                        <span *ngIf="product.homeFlag" class="true-check"><i class="fa fa-check"></i></span>
+                        <span *ngIf="!product.homeFlag" class="false-check"><i class="fa fa-close"></i></span>
+                    </td>
+                    <td>
+                        <span *ngIf="product.active" class="true-check"><i class="fa fa-check"></i></span>
+                        <span *ngIf="!product.active" class="false-check"><i class="fa fa-close"></i></span>
+                    </td>
+                    <td>{{product.cat.name}}</td>
+                </tr>
+              </tbody>
+        </table>
+    </div>
+</div>
+<style>
+    .img_product:hover {
+        transform: scaleX(-1);
+    }
+</style>
+
+
+<app-edit-product-details [product]="productEditable" (updateProductState)="onUpdateProductState();" ></app-edit-product-details>

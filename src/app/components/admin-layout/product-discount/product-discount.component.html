@@ -1,0 +1,47 @@
+<div class="row" style="margin-top:30px;">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-11">
+                <h1>Product Discount</h1>
+            </div>
+            <div class="col-md-1">
+                <div (click)="initNewDiscount();" class="btn-create-new">
+                    <span style="margin:auto;cursor: pointer;"><i class="fa fa-plus" style="font-size: 24px;color:#EDEFFD;"></i></span>
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="loaderService.isLoading | async">
+            <app-progress></app-progress>
+        </div>
+
+        <table class="table table-dark table-hover mt-4">
+            <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Created Date</th>
+                  <th scope="col">Valid Until</th>
+                  <th scope="col">Discount Unit</th>
+                  <th scope="col">Discount Value</th>
+                  <th scope="col">Name</th>
+                  <th>Img product</th>
+                  <th>Product Discount</th>
+                </tr>
+              </thead>
+              <tbody id="product-table-body">
+                <tr class="clickable-row" *ngFor="let item of productDiscounts; let i = index">
+                    <td>{{i+1}}</td>
+                    <td>{{formatDate(item.dateCreated.toString())}}</td>
+                    <td>{{formatDate(item.validUntil.toString())}}</td>
+                    <td>{{item.discountUnit}}</td>
+                    <td>{{item.discountValue}}</td>
+                    <td>{{item.name}}</td>
+                    <td style="width: 120px; height: 100px;"><img class="img_product" src="http://localhost:5275/img_products/{{item.product.image}}" alt="{{item.product.name}}"></td>
+                    <td>{{item.product.name}}</td>
+                </tr>
+              </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- <app-edit-product [product]="productToEdit" (productsUpdated)="reloadProductList($event)"></app-edit-product> -->

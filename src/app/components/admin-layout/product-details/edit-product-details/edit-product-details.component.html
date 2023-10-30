@@ -1,0 +1,130 @@
+<div class="wrapper" *ngIf="product">
+  <!-- The Modal -->
+  <div id="myModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <span style="text-align: right" class="close" (click)="closeModal()"
+        >&times;</span
+      >
+      <div class="row mt-2">
+        <div class="col-md-10">
+          <p>
+            Detail of product:<span class="main-product-name">
+              {{ product.name }}</span
+            >
+          </p>
+          <div class="product-state">
+            <span>
+              Best seller
+              <input type="checkbox" [(ngModel)]="product.bestSeller" (ngModelChange)="onBestSellerChange(product)" />
+            </span>
+
+            <span>
+              Home flag
+              <input type="checkbox" [(ngModel)]="product.homeFlag" (ngModelChange)="onHomeFlagChange(product)" />
+            </span>
+
+            <span>
+              Active <input type="checkbox" [(ngModel)]="product.active" (ngModelChange)="onActiveChange(product)" />
+            </span>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <span style="float: right" (click)="addProductDetail()">
+            <i id="btn-create-new" class="fa fa-plus"></i>
+          </span>
+        </div>
+      </div>
+
+      <table class="table-dark table table-hover">
+        <thead>
+          <th>#</th>
+          <th>Stock left</th>
+          <th>Import quantity</th>
+          <th>Size</th>
+          <th>Base price</th>
+          <th>Sale price</th>
+          <th>Date created</th>
+        </thead>
+        <tbody *ngIf="product.productDetails != null">
+          <!-- Neu co thong tin ve chi tiet san pham -->
+          <tr *ngFor="let item of product.productDetails" (click)="editProductDetail(item);" >
+            <td>
+              <span class="remove-detail"><i class="fa fa-trash"></i></span>
+            </td>
+            <td>
+              {{ item.quantity }}
+            </td>
+            <td>
+              {{ item.importQuantity }}
+            </td>
+            <td>
+              {{ item.size }}
+            </td>
+            <td>${{ item.productPrice.basePrice }}</td>
+            <td>${{ item.productPrice.salePrice }}</td>
+            <td>{{ formatDate(item.createdDate.toString()) }}</td>
+          </tr>
+        </tbody>
+        <tbody *ngIf="product.productDetails == null">
+          <!-- Neu khong co thong tin ve chi tiet san pham -->
+          <tr>
+            <p
+              style="
+                padding-left: 40px;
+                padding-top: 10px;
+                font-size: 16px;
+                font-weight: bold;
+              "
+            >
+              You haven't provided any information
+            </p>
+          </tr>
+        </tbody>
+      </table>
+      <div class="row" *ngIf="productDetailToEdit != null">
+        <div class="col-md-12">
+            <p>Create or Update Detail of product</p>
+            <span style="cursor: pointer;margin-right: 20px;" (click)="onCloseCreateOrUpdateForm();">Close</span>
+            <table id="table-create-or-update">
+              <tr>
+                <td>Stock left</td>
+                <td><input type="text" [(ngModel)]="productDetailToEdit.quantity" /></td>
+              </tr>
+              <tr>
+                <td>Import quantity</td>
+                <td><input type="text" [(ngModel)]="productDetailToEdit.importQuantity"/></td>
+              </tr>
+              <tr>
+                <td>Sale price</td>
+                <td><input type="text" [(ngModel)]="productDetailToEdit.productPrice.salePrice" /></td>
+              </tr>
+              <tr>
+                <td>Base price</td>
+                <td><input type="text" [(ngModel)]="productDetailToEdit.productPrice.basePrice" /></td>
+              </tr>
+              <tr>
+                <td>Size</td>
+                <td><input type="text" [(ngModel)]="productDetailToEdit.size" /></td>
+              </tr>
+              <tr>
+                <td>Date Created</td>
+                <td><input type="date" [ngModel] ="productDetailToEdit.createdDate | date:'yyyy-MM-dd'"  /></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td>
+                  <div class="btn btn-primary" *ngIf="productDetailToEdit.id == 0" (click)="onAddProductDetail(productDetailToEdit)">
+                    Create
+                  </div>
+                  <div class="btn btn-primary" *ngIf="productDetailToEdit.id > 0">
+                    Save
+                  </div>
+                </td>
+              </tr>
+            </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
